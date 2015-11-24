@@ -38,13 +38,13 @@ public class BookReviewController {
     public BookReview getBookReview(@PathVariable String isbn){
 
         URI uri = fetchServiceURI("book");
-        String productUrl = uri + "/book/" + isbn;
-        Book book = restTemplate.getForObject(productUrl, Book.class);
+        String bookServiceUrl = uri + "/book/" + isbn;
+        Book book = restTemplate.getForObject(bookServiceUrl, Book.class);
 
         uri = fetchServiceURI("review");
-        String reviewUrl = uri + "/review/" + isbn;
+        String reviewServiceUrl = uri + "/review/" + isbn;
 
-        Review review = restTemplate.getForObject(reviewUrl, Review.class);
+        Review review = restTemplate.getForObject(reviewServiceUrl, Review.class);
 
         BookReview br = new BookReview();
         br.setAuthor(book.getAuthor());
