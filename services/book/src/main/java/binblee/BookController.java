@@ -33,7 +33,7 @@ public class BookController {
         }
     }
 
-    @RequestMapping("/books")
+    @RequestMapping(value = "/books", method=RequestMethod.GET)
     public List<Book> getBooks(){
         return bookList;
     }
