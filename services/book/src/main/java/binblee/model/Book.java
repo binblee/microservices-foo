@@ -4,10 +4,11 @@ package binblee.model;
  * Created by libin on 11/21/15.
  */
 public class Book {
-    public Book(String name, String author, Double price) {
+    public Book(String name, String author, Double price, String isbn) {
         this.name = name;
         this.author = author;
         this.price = price;
+        this.isbn = isbn;
     }
 
     public String getName() {
@@ -34,8 +35,17 @@ public class Book {
         this.price = price;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
     private String name;
     private String author;
     private Double price;
+    private String isbn;
 
 }
