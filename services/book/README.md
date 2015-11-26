@@ -16,3 +16,10 @@ eureka:
   instance:
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 ```
+
+### REST API
+
+```
+/books
+/book/{isbn}
+```

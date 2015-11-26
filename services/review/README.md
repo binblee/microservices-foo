@@ -4,3 +4,10 @@
 
 - isbn
 - comments
+
+
+### REST API
+
+```
+/review/{isbn}
+```
