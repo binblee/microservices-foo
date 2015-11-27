@@ -3,6 +3,7 @@ package binblee;
 import binblee.model.Book;
 import binblee.model.BookReview;
 import binblee.model.Review;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,11 @@ public class BookReviewController {
     @RequestMapping(value="/br/{isbn}", method = RequestMethod.GET)
     public BookReview getBookReview(@PathVariable String isbn){
 
+        return getBookReviewRemote(isbn);
+    }
+
+    @HystrixCommand(fallbackMethod = "getBookReviewFallback")
+    private BookReview getBookReviewRemote(String isbn) {
         URI uri = fetchServiceURI("book");
         String bookServiceUrl = uri + "/book/" + isbn;
         Book book = restTemplate.getForObject(bookServiceUrl, Book.class);
@@ -52,6 +58,12 @@ public class BookReviewController {
         br.setTitle(book.getName());
         br.setComments(review.getComments());
 
+        return br;
+    }
+
+    private BookReview getBookReviewFallback(String isbn){
+        BookReview br = new BookReview();
+        br.setTitle("Not Found");
         return br;
     }
 
