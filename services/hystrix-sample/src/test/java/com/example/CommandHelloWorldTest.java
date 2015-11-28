@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import rx.Observable;
 
 import java.util.concurrent.Future;
 
@@ -25,8 +26,35 @@ public class CommandHelloWorldTest {
         assertEquals(RESULT,new CommandHelloWorld(PARAM).execute());
     }
 
+    @Test
     public void testAsynchronos() throws Exception {
         Future<String> fs = new CommandHelloWorld(PARAM).queue();
         assertEquals(RESULT,fs.get());
+    }
+
+    @Test
+    public void testObserveBlocking() {
+        Observable<String> os = new CommandHelloWorld(PARAM).observe();
+        assertEquals(RESULT, os.toBlocking().single());
+    }
+
+    @Test
+    public void testObserveNonblocking() {
+        Observable<String> os = new CommandHelloWorld(PARAM).observe();
+        os.subscribe((v) -> {
+            assertEquals(RESULT, v);
+        });
+    }
+
+    @Test
+    public void testObserveNoblockingWithException() {
+        Observable<String> os = new CommandHelloWorld(PARAM).observe();
+        os.subscribe( (v) -> {
+            assertEquals(RESULT,v);
+        }, (exception) ->{
+            exception.printStackTrace();
+        }
+
+        );
     }
 }
