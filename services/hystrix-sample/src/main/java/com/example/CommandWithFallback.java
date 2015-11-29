@@ -31,7 +31,7 @@ public class CommandWithFallback extends HystrixCommand<String> {
         if( name.equals(PARAM) ) {
             return GOOD_RESULT;
         }else if (name.equals(TIMEOUT_PARAM)){
-            Thread.sleep(400);
+            Thread.sleep(500);
             return GOOD_RESULT;
         }
         throw new IllegalArgumentException();
