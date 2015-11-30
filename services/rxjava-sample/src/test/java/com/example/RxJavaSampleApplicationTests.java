@@ -8,6 +8,9 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -75,6 +78,31 @@ public class RxJavaSampleApplicationTests {
         Observable.just(PARAM).map( s -> s + " - map result").subscribe(
             s -> assertEquals(RESULT + " - map result" ,s)
         );
+    }
+
+    @Test
+    public void map_to_different_type(){
+        Observable.just(PARAM)
+            .map(s -> s.hashCode())
+            .subscribe(s -> assertEquals(s.hashCode(),PARAM.hashCode()));
+    }
+
+    @Test
+    public void from(){
+        List<String> list = Arrays.asList(PARAM,PARAM,PARAM);
+        Observable.from(list)
+            .subscribe(s -> {
+                assertEquals(PARAM,s);
+                System.out.println(s);
+            });
+    }
+
+    @Test
+    public void filter(){
+        List<String> list = Arrays.asList("Blah Blah", PARAM, "Blah Blah again");
+        Observable.from(list)
+            .filter(s -> s.equals(PARAM))
+            .subscribe( s -> assertEquals(PARAM,s));
     }
 
 }
