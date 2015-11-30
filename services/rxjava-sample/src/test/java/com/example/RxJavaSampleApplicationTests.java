@@ -105,4 +105,12 @@ public class RxJavaSampleApplicationTests {
             .subscribe( s -> assertEquals(PARAM,s));
     }
 
+    @Test
+    public void take(){
+        List<String> list = Arrays.asList("Blah Blah", PARAM, "Blah Blah again");
+        Observable.from(list)
+            .take(2)
+            .subscribe(s -> System.out.println(s));
+    }
+
 }
