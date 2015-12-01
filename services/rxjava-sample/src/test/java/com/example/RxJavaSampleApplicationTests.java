@@ -113,4 +113,60 @@ public class RxJavaSampleApplicationTests {
             .subscribe(s -> System.out.println(s));
     }
 
+    private Observable<List<String>> fakeQueryToGenerateStringList(){
+        List<String> list = Arrays.asList(PARAM,PARAM,PARAM);
+        return Observable.just(list);
+    }
+
+    // loopInSubscribe, observableInSubscribe and flatMap
+    // three ways to implement loop within Observable objects
+
+    @Test
+    public void loopInSubscribe(){
+        fakeQueryToGenerateStringList().subscribe(ss -> {
+            for (String s : ss){
+                System.out.println(s);
+                assertEquals(PARAM, s);
+            }
+        });
+    }
+
+    @Test
+    public void observableInSubscribe(){
+        fakeQueryToGenerateStringList().subscribe(
+            ss -> Observable.from(ss).subscribe(
+                s -> {
+                    System.out.println(s);
+                    assertEquals(PARAM, s);
+                }
+            )
+        );
+    }
+
+    @Test
+    public void flatMap(){
+        fakeQueryToGenerateStringList()
+            .flatMap( ss -> Observable.from(ss) )
+            .subscribe(s -> {
+                System.out.println(s);
+                assertEquals(PARAM,s);
+            } )
+        ;
+    }
+
+    private Observable<Integer> getStringLength(String s){
+        Integer length = new Integer(s.length());
+        return Observable.just(length);
+    }
+    @Test
+    public void multipleFlatMap(){
+        fakeQueryToGenerateStringList()
+            .flatMap( ss -> Observable.from(ss) )
+            .flatMap( s -> {
+                System.out.println(s);
+                return getStringLength(s);
+            }).subscribe(
+                s -> System.out.println(s)
+            );
+    }
 }
