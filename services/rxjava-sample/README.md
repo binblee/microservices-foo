@@ -1,5 +1,14 @@
 # RxJava Example
 
+### Operators
+
+Run in RxJavaSampleApplicationTests:
+
+- map
+- filter
+- from
+- take
+
 ### Reference
 
 [Grokking RxJava, Part 1: The Basics](http://blog.danlew.net/2014/09/15/grokking-rxjava-part-1/)
