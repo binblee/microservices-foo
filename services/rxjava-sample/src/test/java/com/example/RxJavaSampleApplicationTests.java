@@ -174,7 +174,8 @@ public class RxJavaSampleApplicationTests {
 
     @Test
     public void errorHandling(){
-        fakeMethodThatThrowException()
+        Observable.just(PARAM)
+            .map( s -> fakeMethodThatThrowException(s) )
             .subscribe(new Subscriber<String>(){
                 @Override
                 public void onCompleted() {
@@ -194,8 +195,11 @@ public class RxJavaSampleApplicationTests {
     }
 
     // TODO why onError cannot catch this exception?
-    private Observable<String> fakeMethodThatThrowException(){
-//        return Observable.just(PARAM);
-        throw new InvalidParameterException();
+    private String fakeMethodThatThrowException(String param){
+        if( PARAM.equals(param)) {
+            throw new InvalidParameterException();
+        }else{
+            return param;
+        }
     }
 }
