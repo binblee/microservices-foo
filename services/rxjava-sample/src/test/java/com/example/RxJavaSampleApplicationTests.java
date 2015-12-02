@@ -8,10 +8,12 @@ import rx.Observable;
 import rx.Subscriber;
 import rx.functions.Action1;
 
+import java.security.InvalidParameterException;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = RxJavaSampleApplication.class)
@@ -168,5 +170,32 @@ public class RxJavaSampleApplicationTests {
             }).subscribe(
                 s -> System.out.println(s)
             );
+    }
+
+    @Test
+    public void errorHandling(){
+        fakeMethodThatThrowException()
+            .subscribe(new Subscriber<String>(){
+                @Override
+                public void onCompleted() {
+                    System.out.println("onCompleted is invoked.");
+                }
+
+                @Override
+                public void onError(Throwable e) {
+                    System.out.println("onError is invoked.");
+                }
+
+                @Override
+                public void onNext(String s) {
+                    System.out.println("onNext is invoked.");
+                }
+            });
+    }
+
+    // TODO why onError cannot catch this exception?
+    private Observable<String> fakeMethodThatThrowException(){
+//        return Observable.just(PARAM);
+        throw new InvalidParameterException();
     }
 }
