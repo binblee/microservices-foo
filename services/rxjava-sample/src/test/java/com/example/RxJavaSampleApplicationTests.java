@@ -194,7 +194,7 @@ public class RxJavaSampleApplicationTests {
             });
     }
 
-    // TODO why onError cannot catch this exception?
+    // The operators don't have to handle the Exception.
     private String fakeMethodThatThrowException(String param){
         if( PARAM.equals(param)) {
             throw new InvalidParameterException();
