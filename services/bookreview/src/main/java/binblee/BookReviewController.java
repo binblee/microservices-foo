@@ -27,6 +27,7 @@ public class BookReviewController {
 
     private static final Logger log = LoggerFactory.getLogger(BookReviewController.class);
 
+    //TODO: loadBalancer cannot be autowired. Need to be fixed.
     @Autowired
     private LoadBalancerClient loadBalancer;
 
