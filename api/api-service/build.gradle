@@ -31,8 +31,8 @@ repositories {
 
 
 dependencies {
-    compile('org.springframework.security.oauth:spring-security-oauth2:2.0.8.RELEASE')
-    compile('org.springframework.cloud:spring-cloud-starter-security:1.0.0.RELEASE')
+//    compile('org.springframework.security.oauth:spring-security-oauth2:2.0.8.RELEASE')
+//    compile('org.springframework.cloud:spring-cloud-starter-security:1.0.0.RELEASE')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.cloud:spring-cloud-starter-eureka:1.0.0.RELEASE')
     testCompile('org.springframework.boot:spring-boot-starter-test')
