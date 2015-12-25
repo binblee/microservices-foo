@@ -1,0 +1,7 @@
+discovery:
+  image: binblee/discovery
+
+book:
+  image: binblee/book
+  links:
+    - discovery
