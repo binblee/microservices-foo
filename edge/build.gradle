@@ -7,6 +7,8 @@ buildscript {
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+
     }
 }
 
@@ -55,4 +57,18 @@ eclipse {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.7'
+}
+
+group = 'binblee'
+apply plugin: 'docker'
+task buildDocker(type: Docker, dependsOn: build) {
+    push = false
+    applicationName = jar.baseName
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
 }

@@ -5,3 +5,18 @@ book:
   image: binblee/book
   links:
     - discovery
+
+review:
+  image: binblee/review
+  links:
+    - discovery
+
+bookreview:
+  image: binblee/bookreview
+  links:
+    - discovery
+
+edge:
+  image: binblee/edge
+  links:
+    - discovery
