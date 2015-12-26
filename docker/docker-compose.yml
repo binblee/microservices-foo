@@ -1,5 +1,7 @@
 discovery:
   image: binblee/discovery
+  ports:
+    - "8761:8761"
 
 book:
   image: binblee/book
@@ -20,3 +22,5 @@ edge:
   image: binblee/edge
   links:
     - discovery
+  ports:
+    - "8765:8765"
