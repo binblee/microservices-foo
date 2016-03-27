@@ -11,7 +11,6 @@
 ### Sample applications
 
 - [services/hystrix-sample](services/hystrix-sample) Netflix Hystrix example
-- [services/rxjava-sample](services/rxjava-sample) Netflix RxJava example
 
 ### OAuth2 and API-gateway
 
