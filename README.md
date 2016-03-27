@@ -8,10 +8,6 @@
 - [services/review](services/review)
 - [services/bookreview](services/bookreview) - data from book and review
 
-### Sample applications
-
-- [services/hystrix-sample](services/hystrix-sample) Netflix Hystrix example
-
 ### OAuth2 and API-gateway
 
 - [api/authserver](api/authserver) Authserver
